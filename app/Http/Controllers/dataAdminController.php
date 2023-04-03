@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class dataAdminController extends Controller
 {
@@ -122,12 +123,15 @@ class dataAdminController extends Controller
 
     public function updateAdmin(Request $request)
     {
-        $dAdmin = User::where('id', $request->id)->first();
+        $dAdmin = User::where('idUser', $request->idUser)->first();
 
         if ($request->password) {
             $this->validate($request, [
                 'namaPengguna' => 'required',
-                'username' => 'required|unique:users,username,' . $dAdmin->id,
+                'username' => [
+                    'required',
+                    Rule::unique('users')->ignore($request->idUser, 'idUser'),
+                ],
                 // 'gambar' => 'required',
                 'userRole' => 'required',
                 'alamat' => 'required',
@@ -152,7 +156,11 @@ class dataAdminController extends Controller
         } else {
             $this->validate($request, [
                 'namaPengguna' => 'required',
-                'username' => 'required|unique:users,username,' . $dAdmin->id,
+
+                'username' => [
+                    'required',
+                    Rule::unique('users')->ignore($request->idUser, 'idUser'),
+                ],
                 // 'gambar' => 'required',
                 'userRole' => 'required',
                 'alamat' => 'required',
@@ -175,16 +183,20 @@ class dataAdminController extends Controller
                 'password.confirmed' => 'kata sandi harus sama',
             ]);
         }
+        if ($request->gambar) {
 
-        if (Storage::exists('public/' . $dAdmin->gambar)) {
-            Storage::delete('public/' . $dAdmin->gambar);
-            // $this->alert('success', 'gambar Berhasil Diupdate');
-        };
 
-        $image_name = uniqid() . '.' . $request->gambar->getClientOriginalExtension();
-        $image_path = 'images/' . $image_name;
-        Image::make($request->gambar->getRealPath())->fit(500, 500)->save(storage_path('app/public/' . $image_path));
+            if (Storage::exists('public/' . $dAdmin->gambar)) {
+                Storage::delete('public/' . $dAdmin->gambar);
+                // $this->alert('success', 'gambar Berhasil Diupdate');
+            };
 
+            $image_name = uniqid() . '.' . $request->gambar->getClientOriginalExtension();
+            $image_path = 'images/' . $image_name;
+            Image::make($request->gambar->getRealPath())->fit(500, 500)->save(storage_path('app/public/' . $image_path));
+        }else{
+            $image_path = $dAdmin->gambar;
+        }
 
         $dAdmin->update([
             'namaPengguna' => $request->namaPengguna,
@@ -201,7 +213,7 @@ class dataAdminController extends Controller
     }
     public function deleteAdmin(Request $request, $id)
     {
-        $user = User::where('id', $id)->first();
+        $user = User::where('idUser', $id)->first();
         Storage::delete('public/' . $user->gambar);
         if (!$user) {
             Alert::success('GAGAL', 'Menghapus Data Admin');
@@ -268,11 +280,11 @@ class dataAdminController extends Controller
     public function updatePetani(Request $request)
     {
         $dPetani = User::where('idUser', $request->idUser)->first();
-
+        // .$id.',user_id'
         if ($request->password) {
             $this->validate($request, [
                 'namaPengguna' => 'required',
-                'username' => 'required|unique:users,username,' . $dPetani->idUser,
+                'username' => 'required|unique:users,username,' . $dPetani->idUser . ',user_id',
                 // 'gambar' => 'required',
                 'jenisKelamin' => 'required',
                 'alamat' => 'required',
