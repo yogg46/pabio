@@ -2,7 +2,11 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\detailDiagnosa;
 use App\Models\DetailPenyakit;
+use App\Models\Diagnosa as ModelsDiagnosa;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Diagnosa extends Component
@@ -18,8 +22,12 @@ class Diagnosa extends Component
 
     public function render()
     {
+
+
         return view('livewire.diagnosa', [
-            'gejala' => DetailPenyakit::search('Buah', $this->jnsTanaman)->search('Bagian', $this->bgnTanaman)->get()
+            // 'gejala' => DetailPenyakit::where('Buah', $this->jnsTanaman)->where('Bagian', $this->bgnTanaman)->get()
+            'gejala' => DetailPenyakit::all()
+            // 'gejala' => $gejala,
         ])
             ->extends('layouts.main', [
                 'tittle' => ' ',
@@ -27,20 +35,19 @@ class Diagnosa extends Component
             ->section('page');
     }
 
-    public function ResetISI()
+    public function ResetISI($id)
     {
-        $this->gjlTanaman = [];
+        $this->gjlTanaman[$id] = [];
     }
-    public function showBagian()
+    public function showBagian($id)
     {
         $this->showBGN = 'true';
-        $this->ResetISI();
+        $this->ResetISI($id);
     }
-    public function showGejala()
+    public function showGejala($id)
     {
         $this->showGJL = 'true';
-        $this->ResetISI();
-
+        $this->ResetISI($id);
     }
 
 
@@ -57,6 +64,7 @@ class Diagnosa extends Component
 
     public function remove($i)
     {
+
         unset($this->inputs[$i]);
     }
 
@@ -81,10 +89,20 @@ class Diagnosa extends Component
         //         'username.*.required' => 'Username field is required',
         //     ]
         // );
+        // $user = Auth::user()->idUser;
+        foreach ($this->jnsTanaman as $key => $value) {
+            // $diagnosaa =  ModelsDiagnosa::create(['idUser' => $user, 'tanggal' => Carbon::now()]);
+            $diagnosaa = new ModelsDiagnosa();
+            $diagnosaa->idUser = Auth::user()->idUser;
+            $diagnosaa->tanggal = Carbon::now();
+            $diagnosaa->save();
 
-        // foreach ($this->account as $key => $value) {
-        //     Account::create(['account' => $this->account[$key], 'username' => $this->username[$key]]);
-        // }
+            foreach ($this->gjlTanaman[$key] as $item) {
+                detailDiagnosa::create([
+                    'idDiagnosa' => $diagnosaa->id, 'idDetailPenyakit' => $item
+                ]);
+            }
+        }
 
         // $this->inputs = [];
 

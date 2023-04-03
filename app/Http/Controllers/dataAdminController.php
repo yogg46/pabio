@@ -267,12 +267,12 @@ class dataAdminController extends Controller
 
     public function updatePetani(Request $request)
     {
-        $dPetani = User::where('id', $request->id)->first();
+        $dPetani = User::where('idUser', $request->idUser)->first();
 
         if ($request->password) {
             $this->validate($request, [
                 'namaPengguna' => 'required',
-                'username' => 'required|unique:users,username,' . $dPetani->id,
+                'username' => 'required|unique:users,username,' . $dPetani->idUser,
                 // 'gambar' => 'required',
                 'jenisKelamin' => 'required',
                 'alamat' => 'required',
@@ -297,7 +297,7 @@ class dataAdminController extends Controller
         } else {
             $this->validate($request, [
                 'namaPengguna' => 'required',
-                'username' => 'required|unique:users,username,' . $dPetani->id,
+                'username' => 'required|unique:users,username,' . $dPetani->idUser,
                 // 'gambar' => 'required',
                 'jenisKelamin' => 'required',
                 'alamat' => 'required',

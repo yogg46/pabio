@@ -18,7 +18,13 @@ class Penyakit extends Model
     {
         parent::boot();
         static::creating(function ($model) {
-            $model->key = str_replace([' ',"'"], '-',strtolower($model->idPenyakit.' '.$model->namaPenyakit));
+            $lastKey = static::max('idPenyakit'); // Get the highest key currently in the database
+            $lastNumber = substr($lastKey, 2); // Extract the numeric part of the key
+            $newNumber = intval($lastNumber) + 1; // Increment the numeric part
+            $model->idPenyakit = 'P-' . $newNumber; // Set the key attribute on the new model instance
+        });
+        static::creating(function ($model) {
+            $model->key = str_replace([' ', "'"], '-', strtolower($model->idPenyakit . ' ' . $model->namaPenyakit));
         });
     }
 
@@ -44,10 +50,10 @@ class Penyakit extends Model
 
     public function penyakitToDetailPenyakit()
     {
-        return $this->hasMany(DetailPenyakit::class, 'idPenyakit');
+        return $this->hasMany(DetailPenyakit::class, 'idPenyakit', 'idPenyakit');
     }
     public function penyakitToObat()
     {
-        return $this->hasMany(Obat::class, 'idPenyakit');
+        return $this->hasMany(Obat::class, 'idPenyakit', 'idPenyakit');
     }
 }

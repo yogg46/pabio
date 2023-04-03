@@ -16,10 +16,10 @@ class DetailPenyakit extends Model
     ];
     public function DetailPenyakitToGejala()
     {
-        return $this->belongsTo(Gejala::class, 'idGejala');
+        return $this->belongsTo(Gejala::class, 'idGejala', 'idGejala');
     }
     public function DetailPenyakitToPenyakit()
     {
-        return $this->belongsTo(Penyakit::class, 'idPenyakit');
+        return $this->belongsTo(Penyakit::class, 'idPenyakit', 'idPenyakit');
     }
 }

@@ -33,6 +33,26 @@
     <!-- <link rel="stylesheet" id="css-theme" href="/assets/css/themes/amethyst.min.css"> -->
     <!-- END Stylesheets -->
     @livewireStyles
+    <style>
+        .example {
+          /* background-color: #eee; */
+          /* width: 200px; */
+          height: 500px;
+          /* border: 1px dotted black; */
+          overflow-y: scroll; /* Add the ability to scroll */
+        }
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .example::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .example {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+        }
+        </style>
 </head>
 
 <body>
@@ -549,7 +569,25 @@
     -->
     <script src="/assets/js/oneui.app.min.js"></script>
     @include('sweetalert::alert')
+    <script>
+        // get the div element
+        var div = document.getElementById('messages-container');
+
+        // automatically scroll to the bottom of the div when its content changes
+        div.addEventListener('DOMSubtreeModified', function() {
+            div.scrollTop = div.scrollHeight;
+        });
+    </script>
+
     <script type="text/javascript">
+//     Livewire.on('scrollToBottom', () => {
+//   const messagesContainer = document.getElementById('messages-container');
+//   messagesContainer.scrollTop = messagesContainer.scrollHeight;
+// });
+// window.addEventListener('scrollToBottom', () => {
+//   const messagesContainer = document.getElementById('messages-container');
+//   messagesContainer.scrollTop = messagesContainer.scrollHeight;
+// });
         function deleteConfirmation(id) {
             swal({
                 title: "Delete?",

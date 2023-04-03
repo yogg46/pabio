@@ -10,7 +10,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Cviebrock\EloquentSluggable\Sluggable;
-
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Unique;
 
 class User extends Authenticatable
 {
@@ -25,7 +26,7 @@ class User extends Authenticatable
 
 
         static::creating(function ($model) {
-            $model->idUser = str_replace([' ', "'"], '-', strtolower(($model->userRole == 'user' ? 'petani' : ($model->userRole == 'admin' ? 'admin' : 'pemilik')) . '-' . CarbonImmutable::now()->timestamp));
+            $model->idUser = str_replace([' ', "'"], '-', strtolower(($model->userRole == 'user' ? 'petani' : ($model->userRole == 'admin' ? 'admin' : 'pemilik')) . '-' . CarbonImmutable::now()->timestamp . Str::random(3) ));
         });
         static::creating(function ($model) {
             $model->key = str_replace([' ', "'"], '-', strtolower($model->idUser . ' ' . $model->namaPengguna));

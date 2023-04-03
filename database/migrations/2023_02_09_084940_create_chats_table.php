@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('chats', function (Blueprint $table) {
             $table->string('idChat')->primary();
-            $table->string('idUser')->constrained()
-                ->onUpdate('cascade');
-            $table->string('username', 25);
             $table->text('isi');
-            $table->dateTime('tanggal');
-            $table->string('balas', 255);
-            $table->foreign('idUser')->references('idUser')->on('users');
+            $table->date('tanggal');
+            $table->string('sender_id');
+            $table->string('receiver_id');
+            $table->string('is_admin')->default('salah');
+            $table->foreign('sender_id')->references('idUser')->on('users')->onDelete('cascade');
+            $table->foreign('receiver_id')->references('idUser')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

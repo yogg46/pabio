@@ -5,7 +5,7 @@
             <div class="block-content block-content-full">
                 <form action="{{ route('update-data-petani') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="id" value="{{ $editPetani->id }}">
+                    <input type="hidden" name="idUser" value="{{ $editPetani->idUser }}">
                     <div class="row">
                         <div class="col-12 col-md-3 col-lg-3 col-xl-12">
                             <div class="mb-4">

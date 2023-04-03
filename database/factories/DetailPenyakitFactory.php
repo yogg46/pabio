@@ -19,8 +19,8 @@ class DetailPenyakitFactory extends Factory
      */
     public function definition()
     {
-        $Penyakit = Penyakit::pluck('id');
-        $gejala = Gejala::pluck('id');
+        $Penyakit = Penyakit::pluck('idPenyakit');
+        $gejala = Gejala::pluck('idGejala');
         return [
             'idPenyakit' => fake()->randomElement($Penyakit),
             'idGejala' => fake()->randomElement($gejala),

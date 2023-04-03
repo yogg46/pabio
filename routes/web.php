@@ -5,6 +5,8 @@ use App\Http\Controllers\dataAdminController;
 use App\Http\Controllers\dataAturanController;
 use App\Http\Controllers\dataPakarController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Livewire\Chat\AdminChat;
+use App\Http\Livewire\Chat\UserChat;
 use App\Http\Livewire\Diagnosa;
 use Illuminate\Support\Facades\Route;
 
@@ -43,9 +45,10 @@ Route::get('/laporan', function () {
     return view('admin.dataLaporan.laporan');
 });
 
-Route::get('/chat', function () {
-    return view('admin.dataLaporan.chat');
+Route::get('/chat11', function () {
+    return view('petani.menuDiagnosa.chatadmin');
 });
+// Route::get('/chat', UserChat::class)->name('user-chat');
 
 // Route::get('/komentar', function () {
 //     return view('admin.dataLaporan.komentar');
@@ -61,9 +64,7 @@ Route::get('petani/detailDiagnosa', function () {
     return view('petani.menuDiagnosa.detailDiagnosa');
 });
 
-Route::get('petani/chatadmin', function () {
-    return view('petani.menuDiagnosa.chatadmin');
-});
+Route::get('petani/chatadmin', UserChat::class);
 
 Route::get('petani/komentaradmin', function () {
     return view('petani.menuDiagnosa.komentaradmin');
@@ -120,7 +121,7 @@ Route::get('/laporan/penyakit', [LaporanController::class, 'lappenyakit'])->midd
 Route::get('/laporan/obat', [LaporanController::class, 'lapobat'])->middleware('checkRole:admin,pemilik', 'auth')->name('laporan-obat');
 
 Route::get('/laporan/chat', [LaporanController::class, 'chat'])->name('chat');
-Route::get('/laporan/chat/balaschat/{id}', [LaporanController::class, 'balaschat'])->name('balas-chat');
+Route::get('/laporan/chat/balaschat/{id}', AdminChat::class)->name('balas-chat');
 Route::get('/laporan/komentar', [LaporanController::class, 'komentar'])->name('komentar');
 
 
