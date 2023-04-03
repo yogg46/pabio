@@ -15,11 +15,12 @@ return new class extends Migration
     {
         Schema::create('komentars', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('idUser')->constrained()
+            $table->string('idUser')->constrained()
                 ->onUpdate('cascade');
             $table->string('username', 50);
             $table->string('nilai', 25);
             $table->string('saran');
+            $table->foreign('idUser')->references('idUser')->on('users');
             $table->timestamps();
         });
     }

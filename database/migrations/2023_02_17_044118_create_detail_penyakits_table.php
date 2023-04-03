@@ -15,12 +15,14 @@ return new class extends Migration
     {
         Schema::create('detail_penyakits', function (Blueprint $table) {
             $table->id();
-            $table->enum('Buah', ['Mangga','Alpukat','Jambu Biji','Durian','Nangka','Rambutan','Jeruk','Kelengkeng','Anggur','Sawo']);
-            $table->enum('Bagian', ['Buah','Batang','Daun','Akar']);
-            $table->unsignedBigInteger('idPenyakit')->constrained()
+            $table->enum('Buah', ['Mangga', 'Alpukat', 'Jambu Biji', 'Durian', 'Nangka', 'Rambutan', 'Jeruk', 'Kelengkeng', 'Anggur', 'Sawo']);
+            $table->enum('Bagian', ['Buah', 'Batang', 'Daun', 'Akar']);
+            $table->string('idPenyakit')->constrained()
                 ->onUpdate('cascade');
-            $table->unsignedBigInteger('idGejala')->constrained()
+            $table->string('idGejala')->constrained()
                 ->onUpdate('cascade');
+            $table->foreign('idPenyakit')->references('idPenyakit')->on('penyakits');
+            $table->foreign('idGejala')->references('idGejala')->on('gejalas');
             $table->timestamps();
         });
     }

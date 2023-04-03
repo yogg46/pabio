@@ -14,13 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('chats', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('idUser')->constrained()
+            $table->string('idChat')->primary();
+            $table->string('idUser')->constrained()
                 ->onUpdate('cascade');
             $table->string('username', 25);
             $table->text('isi');
             $table->dateTime('tanggal');
             $table->string('balas', 255);
+            $table->foreign('idUser')->references('idUser')->on('users');
             $table->timestamps();
         });
     }

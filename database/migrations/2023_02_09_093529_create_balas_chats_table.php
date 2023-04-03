@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('balas_chats', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('idChat')->constrained()
+            $table->string('idChat')->constrained()
             ->onUpdate('cascade');
             $table->longText('balasan');
             $table->dateTime('sender');
+            $table->foreign('idChat')->references('idChat')->on('chats');
             $table->timestamps();
         });
     }

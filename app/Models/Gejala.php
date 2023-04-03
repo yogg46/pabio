@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Gejala extends Model
 {
     use HasFactory;
-    use AutoNumberTrait;
+  
     protected static function boot()
     {
         parent::boot();
@@ -17,15 +17,7 @@ class Gejala extends Model
             $model->key = str_replace([' ',"'"], '-',strtolower($model->idGejala.' '.$model->namaGejala));
         });
     }
-    public function getAutoNumberOptions()
-    {
-        return [
-            'idGejala' => [
-                'format' => 'G-?', // autonumber format. '?' will be replaced with the generated number.
-                'length' => 2 // The number of digits in an autonumber
-            ]
-        ];
-    }
+
     // protected $primayKey = 'idGejala';
     protected $fillable = [
         'idGejala',

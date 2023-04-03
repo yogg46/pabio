@@ -18,10 +18,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(UserSeed::class);
-        $this->call(PenyakitSeeder::class);
-        $this->call(GejalaSeeder::class);
-        $this->call(ObatSeeder::class);
-        DetailPenyakit::factory(200)->create();
+        // $this->call(PenyakitSeeder::class);
+        // $this->call(GejalaSeeder::class);
+        // $this->call(ObatSeeder::class);
+        // DetailPenyakit::factory(200)->create();
         // User::factory(60)->create();
         // \App\Models\Penyakit::factory(8)->create();
         // \App\Models\Gejala::factory(51)->create();

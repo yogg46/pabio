@@ -12,7 +12,7 @@ class Penyakit extends Model
 {
     use HasFactory;
     // use Sluggable;
-    use AutoNumberTrait;
+    // use AutoNumberTrait;
 
     protected static function boot()
     {
@@ -22,15 +22,15 @@ class Penyakit extends Model
         });
     }
 
-    public function getAutoNumberOptions()
-    {
-        return [
-            'idPenyakit' => [
-                'format' => 'P-?', // autonumber format. '?' will be replaced with the generated number.
-                'length' => 2 // The number of digits in an autonumber
-            ]
-        ];
-    }
+    // public function getAutoNumberOptions()
+    // {
+    //     return [
+    //         'idPenyakit' => [
+    //             'format' => 'P-?', // autonumber format. '?' will be replaced with the generated number.
+    //             'length' => 2 // The number of digits in an autonumber
+    //         ]
+    //     ];
+    // }
     protected $primayKey = 'idPenyakit';
     protected $fillable = [
         'idPenyakit',

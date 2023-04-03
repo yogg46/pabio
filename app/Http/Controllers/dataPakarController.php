@@ -67,7 +67,7 @@ class dataPakarController extends Controller
 
     public function tambahObat()
     {
-        $idObt = Obat::orderBy('id', 'desc')->first();
+        $idObt = Obat::orderBy('idObat', 'desc')->first();
         $Datapenyakit = Penyakit::all();
         return view('admin.dataPakar.tambahObat',[
         'idObt'=>$idObt,
@@ -173,7 +173,7 @@ $dGejala = Gejala::where('id',$request->id)->first();
             'gambar'=> $image_path,
             'keterangan'=>$request->keterangan,
             'solusi'=>$request->solusi,
-            'key'=> ' ',
+
         ]);
         Alert::success('Berhasil','Menambahkan Data Penyakit');
         return redirect()->route('data-penyakit')

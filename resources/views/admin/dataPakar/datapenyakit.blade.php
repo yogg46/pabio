@@ -41,7 +41,7 @@
                                         class="btn btn-sm btn-alt-secondary js-bs-tooltip-enabled">
                                         <i class="fa fa-fw fa-pencil-alt"></i>
                                     </a>
-                                    <a href="{{ route('delete-data-penyakit', $key->id) }}" type="button"
+                                    <a href="{{ route('delete-data-penyakit', $key->idPenyakit) }}" type="button"
                                         class="btn btn-sm btn-alt-secondary js-bs-tooltip-enabled" data-bs-toggle="tooltip"
                                         aria-label="Delete" data-bs-original-title="Delete">
                                         <i class="fa fa-fw fa-times"></i>

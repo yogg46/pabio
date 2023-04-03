@@ -56,7 +56,7 @@
                                         data-bs-toggle="tooltip" aria-label="Delete" data-bs-original-title="Delete">
                                         <i class="fa fa-fw fa-times"></i>
                                     </a> --}}
-                                    <button data-id="{{ $key->id }}" onclick="deletePost(this)" type="button"
+                                    <button data-id="{{ $key->idUser }}" onclick="deletePost(this)" type="button"
                                         class="btn btn-sm btn-alt-secondary js-bs-tooltip-enabled delete-user"
                                         data-bs-toggle="tooltip" aria-label="Delete" data-bs-original-title="Delete">
                                         <i class="fa fa-fw fa-times"></i>

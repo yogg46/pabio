@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -13,8 +14,8 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('idUser')->nullable();
+            // $table->id();
+            $table->string('idUser')->primary();
             $table->string('namaPengguna', 55);
             $table->string('jenisKelamin')->nullable();
             $table->string('username', 25);

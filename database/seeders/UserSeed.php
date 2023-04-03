@@ -17,6 +17,8 @@ class UserSeed extends Seeder
     public function run()
     {
         User::create([
+            // 'idUser' => 'Petani-1',
+            // 'key' => 'Petani-1',
             'namaPengguna' => 'Fabio user',
             'jenisKelamin' => 'Laki-laki',
             'username' => 'fabio1',
@@ -26,6 +28,8 @@ class UserSeed extends Seeder
             // 'gambar' => '123213'
         ]);
         User::create([
+            // 'idUser' => 'Admin-1',
+            // 'key' => 'Admin-1',
             'namaPengguna' => 'Fabio admin',
             'jenisKelamin' => 'Laki-laki',
             'username' => 'fabio2',
@@ -35,6 +39,8 @@ class UserSeed extends Seeder
             // 'gambar' => '123213'
         ]);
         User::create([
+            // 'idUser' => 'Pemilik-1',
+            // 'key' => 'Pemilik-1',
             'namaPengguna' => 'Fabio pemilik',
             'jenisKelamin' => 'Laki-laki',
             'username' => 'fabio3',
@@ -43,6 +49,5 @@ class UserSeed extends Seeder
             'userRole' => 'pemilik',
             // 'gambar' => '123213'
         ]);
-
     }
 }

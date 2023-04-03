@@ -66,6 +66,7 @@ class dataAdminController extends Controller
 
         $this->validate($request, [
             'namaPengguna' => 'required',
+            'idUser' => 'required',
             'username' => 'required|unique:users',
             'gambar' => 'required',
             'idUser' => 'required',
@@ -75,6 +76,7 @@ class dataAdminController extends Controller
         ], [
 
             'namaPengguna.required' => 'nama tidak boleh kosong.',
+            'idUser.required' => 'nama tidak boleh kosong.',
 
             'username.required' => 'nama pengguna tidak boleh kosong.',
             'username.required|unique:users' => 'nama pengguna sudah ada yang menggunakan.',
@@ -97,9 +99,15 @@ class dataAdminController extends Controller
         $image_path = 'images/' . $image_name;
         Image::make($request->gambar->getRealPath())->fit(500, 500)->save(storage_path('app/public/' . $image_path));
 
+
+        if ($request->userRole == 'pemilik') {
+            $idUsr = 'pemilik-' . CarbonImmutable::now()->timestamp;
+        } else {
+            $idUsr = $request->idUser;
+        };
         User::create([
             'namaPengguna' => $request->namaPengguna,
-            'idUser' => $request->idUser,
+            'idUser' => $idUsr,
             'username' => $request->username,
             'gambar' => $image_path,
             'jenisKelamin' => 'Laki-laki',

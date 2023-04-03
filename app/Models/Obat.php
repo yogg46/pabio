@@ -11,18 +11,12 @@ class Obat extends Model
     use HasFactory;
 
 
-    use AutoNumberTrait;
+    // use AutoNumberTrait;
 
 
-    public function getAutoNumberOptions()
-    {
-        return [
-            'idObat' => [
-                'format' => 'S-?', // autonumber format. '?' will be replaced with the generated number.
-                'length' => 2 // The number of digits in an autonumber
-            ]
-        ];
-    }
+    
+    protected $primayKey = 'idObat';
+
     protected $fillable = [
         'idPenyakit',
         'idObat',
@@ -32,8 +26,9 @@ class Obat extends Model
         'jenis',
         'khasiat'
     ];
+
     public function obatToPenyakit()
     {
-        return $this->belongsTo(Penyakit::class, 'idPenyakit');
+        return $this->belongsTo(Penyakit::class, 'idPenyakit','idPenyakit');
     }
 }

@@ -30,8 +30,8 @@
                                 <select class="form-select @error('idPenyakit') is-invalid @enderror" id="example-select"
                                     name="idPenyakit">
                                     @foreach ($Datapenyakit as $s)
-                                        <option value="{{ $s->id }}"
-                                            {{ old('idPenyakit') == $s->id ? 'selected' : '' }}> {{ $s->namaPenyakit }}
+                                        <option value="{{ $s->idPenyakit }}"
+                                            {{ old('idPenyakit') == $s->idPenyakit ? 'selected' : '' }}> {{ $s->namaPenyakit }}
                                         </option>
                                     @endforeach
                                 </select>
